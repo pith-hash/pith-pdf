@@ -12,6 +12,8 @@ categories = ["algorithms", "cryptography"]
 keywords = ["pdf", "text-extraction", "cmap", "fonts", "hashing"]
 
 [dependencies]
+# Error/Result of the whole suite come from pith-digest (fleet-wide single
+# error type), so it is a runtime dependency, not a dev-only one.
 pith-digest = { git = "https://github.com/pith-hash/pith-digest.git", branch = "main" }
 pith-inflate = { git = "https://github.com/pith-hash/pith-inflate.git", branch = "main" }
 
