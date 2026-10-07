@@ -46,15 +46,19 @@
 //! - Every page failure carries the page number ([`Error::Page`]); every
 //!   object-level refusal carries the object ([`Error::Object`]).
 
-#![forbid(unsafe_code)]
+#![cfg_attr(not(feature = "std"), no_std)]
+// `unsafe` is denied everywhere except `ffi`, the C ABI surface the
+// language SDKs bind through: raw pointers exist only at that boundary,
+// and every exported function is a documented `unsafe extern "C"` fn.
+#![deny(unsafe_code)]
 #![deny(missing_docs)]
-#![no_std]
 
 extern crate alloc;
 
 pub mod cmap;
 mod content;
 mod document;
+pub mod ffi;
 mod font;
 mod lex;
 mod object;

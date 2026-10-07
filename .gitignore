@@ -53,6 +53,10 @@ __pycache__/
 .claude-plugin/
 .wrangler/
 
+# Python SDK build scaffolding
+sdk/python/build/
+*.egg-info/
+
 # AI Assistant / Rules
 .jules/
 .jules
