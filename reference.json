@@ -1,0 +1,329 @@
+{
+  "schema": 1,
+  "crate": "pith-pdf",
+  "description": "hex-exact PDF text-extraction reference vectors: every tests/fixtures/*.pdf document opened and extracted by pith-pdf against its .txt truth file and pinned by page count and SHA-256 text digest, plus a scan-rebuild recovery vector and refusal vectors for malformed xref chains and stream objects with exact error messages",
+  "vectors": [
+    {
+      "name": "empty_page",
+      "why": "a content-less page: its only extraction output is the page join",
+      "pages": 2,
+      "rebuilt": false,
+      "text_bytes": 14,
+      "text_sha256": "c8bbf32ef0e7ddc929a2532c9f4137c6c1d3da21896b94f406166fb273e645f7"
+    },
+    {
+      "name": "standard_default",
+      "why": "no /Encoding: StandardEncoding default, unmapped byte decodes as U+FFFD",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 9,
+      "text_sha256": "6d0c6c3113b6765a4eedb63f451cc5b4b8554159a78a3782f6cceef631046ee4"
+    },
+    {
+      "name": "standardenc",
+      "why": "explicit /StandardEncoding with escape-decodable names",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 39,
+      "text_sha256": "eec3fca41ee8f23fd42780fc70a38613db092b6e8dda0da609f7f3c995812e4a"
+    },
+    {
+      "name": "winansi_basic",
+      "why": "/WinAnsiEncoding one-byte codes",
+      "pages": 2,
+      "rebuilt": false,
+      "text_bytes": 107,
+      "text_sha256": "e67f49aca60b161c20b913664047b7cf61a873d3843912f174539b8165e7d7f5"
+    },
+    {
+      "name": "winansi_tj_kern",
+      "why": "TJ kerning gaps below -250 split words",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 52,
+      "text_sha256": "52686fabdae2626a7df324e4e5aaabeb058e8a0b918f2ea74bceee595e2e12c8"
+    },
+    {
+      "name": "macroman",
+      "why": "/MacRomanEncoding table incl. non-Latin-1 code points",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 15,
+      "text_sha256": "a10fb2240957188462ad1176154f87bbc6fc1adbdd81c7a46170c84b28a9aadd"
+    },
+    {
+      "name": "symbol",
+      "why": "/Symbol predefined encoding",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 14,
+      "text_sha256": "6d76cad058a2fa4f0c2a70d2492ae328304943439bbc9089c57c7c8a0148a456"
+    },
+    {
+      "name": "zapfdingbats",
+      "why": "/ZapfDingbats predefined encoding",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 12,
+      "text_sha256": "60afc95202124bacd50052e2155719d5b3c5a2fc90281fcdf781e9145f375fc2"
+    },
+    {
+      "name": "differences",
+      "why": "/Differences overrides on WinAnsi (AGL + uniXXXX names)",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 17,
+      "text_sha256": "8d08a7823a04b4171ea407a0a716792312d9d8b24b7d592b8271c5a3e1f8262c"
+    },
+    {
+      "name": "tounicode_bfchar",
+      "why": "/ToUnicode CMap with bfchar entries",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 8,
+      "text_sha256": "aaf2df1faed49a7854ac546b620ce35e962a237292be3ef6335ac9f8bcb4a4c1"
+    },
+    {
+      "name": "tounicode_bfrange",
+      "why": "/ToUnicode CMap with bfrange scalar and array forms",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 14,
+      "text_sha256": "e2aa5990bb469897b7878a1462c36a801c5c01ca2d58cd9f102f79140b076897"
+    },
+    {
+      "name": "tounicode_surrogate",
+      "why": "/ToUnicode CMap with a surrogate-pair destination",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 16,
+      "text_sha256": "e556c2e44b68b7c57a3099ca5bbf4f3ef3032de1677960215e5c9de44fdeb795"
+    },
+    {
+      "name": "cid_identity",
+      "why": "/Type0 Identity-H CID font with ToUnicode",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 8,
+      "text_sha256": "78d5ef215f9dce58e42fba4fa47265ab28e6bd3c262976b27257a60f55c49d87"
+    },
+    {
+      "name": "cid_cmapstream",
+      "why": "/Type0 CID font with an embedded CMap stream",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 11,
+      "text_sha256": "8d5258bdd188ab6b49b3b9a70cf0924b8f9f84b38ccb02d8cd4ec9e58263a914"
+    },
+    {
+      "name": "xrefstream",
+      "why": "xref stream cross-reference (no classic table)",
+      "pages": 2,
+      "rebuilt": false,
+      "text_bytes": 31,
+      "text_sha256": "c80838424a2aae99f777e8a21edee442f81a155dcad0e39dc3d62c7b1d946b63"
+    },
+    {
+      "name": "xrefstream_w",
+      "why": "xref stream with non-default /W field widths",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 11,
+      "text_sha256": "470c26f45b3e0a48e10e8eb4dd623e21bd9b49889eb7e702495bb09afcbd5cf5"
+    },
+    {
+      "name": "objstm",
+      "why": "objects carried in /ObjStm object streams",
+      "pages": 2,
+      "rebuilt": false,
+      "text_bytes": 21,
+      "text_sha256": "e96631c4234211790b5e676b3e1d4973a3e9248a27e608edb922d74a16e33791"
+    },
+    {
+      "name": "prev_incremental",
+      "why": "/Prev incremental update: newest section wins",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 12,
+      "text_sha256": "5775b5c83a7f3bdb967ef58060e5d847e7fbcfdf9c0a390945f43fd170006bd4"
+    },
+    {
+      "name": "corrupt_xref_recoverable",
+      "why": "trashed xref rebuilt by scanning for object headers",
+      "pages": 1,
+      "rebuilt": true,
+      "text_bytes": 9,
+      "text_sha256": "f6e09cc89f85dcd21d987a4c4af142fe5bbb741de93d375af548f1d4f1d2063b"
+    },
+    {
+      "name": "flate_content",
+      "why": "FlateDecode content stream",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 30,
+      "text_sha256": "dbf7892acf4482279f215d7bf761b8e91ddd5696c9ecbdbc22a6d05f6a679780"
+    },
+    {
+      "name": "contents_array",
+      "why": "content stream delivered as an array of streams",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 28,
+      "text_sha256": "2c0e7eff60de78b8eba8d182733001b6191c3af24779528eb6f80ad02f7cf79d"
+    },
+    {
+      "name": "formxobject",
+      "why": "text inside a Form XObject invoked by Do",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 38,
+      "text_sha256": "9df2b6ba434fe683c8ea64426e95bffca8a8996b654a330846fa882db93a29dc"
+    },
+    {
+      "name": "markcontent",
+      "why": "marked-content operators (BDC/EMC) pass through",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 22,
+      "text_sha256": "1e04c06a727523b6c816563466f47d87e37bc2eef21a02b507f6cc38d375985b"
+    },
+    {
+      "name": "type3",
+      "why": "Type3 glyph procedures drawing text",
+      "pages": 1,
+      "rebuilt": false,
+      "text_bytes": 4,
+      "text_sha256": "6bf1f20dababcb83f3b76cd47a42d7b6e37f9331370769a7c82afa9d9e18aa1d"
+    },
+    {
+      "name": "encrypted",
+      "why": "RC4 V1/R2 Standard security: extraction refuses with page and object context",
+      "pages": 1,
+      "encrypted": true,
+      "error": "page 0: object 6 0: unsupported: encrypted document (/Encrypt in trailer)"
+    },
+    {
+      "name": "recovered_startxref",
+      "why": "synthetic document whose startxref offset is garbage: the xref is rebuilt by scanning and the rebuild is reported, never silent",
+      "pages": 1,
+      "rebuilt": true,
+      "text_bytes": 0,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "input": "255044462d312e340a312030206f626a0a3c3c202f54797065202f436174616c6f67202f5061676573203220302052203e3e0a656e646f626a0a322030206f626a0a3c3c202f54797065202f5061676573202f4b696473205b33203020525d202f436f756e742031203e3e0a656e646f626a0a332030206f626a0a3c3c202f54797065202f50616765202f506172656e74203220302052202f4d65646961426f78205b30203020323030203230305d203e3e0a656e646f626a0a7374617274787265660a6e6f742d616e2d6f66667365740a2525454f460a"
+    }
+  ],
+  "errors": [
+    {
+      "name": "truncated_header",
+      "why": "a 7-byte buffer cannot even hold the %PDF- signature",
+      "api": "Document::open",
+      "input": "255044462d312e",
+      "error": "truncated: PDF header"
+    },
+    {
+      "name": "no_signature",
+      "why": "binary junk with no %PDF- marker inside the first KiB",
+      "api": "Document::open",
+      "input": "6e6f7420612070646620617420616c6c2c206a757374206a756e6b2062797465732e2e2e2e",
+      "error": "invalid magic: PDF signature"
+    },
+    {
+      "name": "missing_startxref",
+      "why": "well-formed header but no startxref marker and no scannable objects",
+      "api": "Document::open",
+      "input": "255044462d312e340a6e6f7468696e672068657265206275742070726f73650a",
+      "error": "bad value: no objects found while scanning"
+    },
+    {
+      "name": "bad_startxref_value",
+      "why": "startxref marker present but its offset is not a number, and nothing is scannable",
+      "api": "Document::open",
+      "input": "255044462d312e340a7374617274787265660a7a7a0a2525454f460a",
+      "error": "bad value: no objects found while scanning"
+    },
+    {
+      "name": "startxref_past_eof",
+      "why": "startxref points past the end of the file and nothing is scannable",
+      "api": "Document::open",
+      "input": "255044462d312e340a7374617274787265660a3939390a2525454f460a",
+      "error": "bad value: no objects found while scanning"
+    },
+    {
+      "name": "lzw_filter_refused",
+      "why": "LZWDecode is a real filter this suite refuses to guess",
+      "api": "pith_pdf::decode_stream",
+      "input": "4c5a574465636f6465",
+      "error": "unsupported: LZWDecode stream filter"
+    },
+    {
+      "name": "crypt_filter_refused",
+      "why": "Crypt streams cannot be decoded without the security handler",
+      "api": "pith_pdf::decode_stream",
+      "input": "4372797074",
+      "error": "unsupported: Crypt stream filter"
+    },
+    {
+      "name": "dct_filter_refused",
+      "why": "DCTDecode (JPEG) is out of scope and named, never silently skipped",
+      "api": "pith_pdf::decode_stream",
+      "input": "4443544465636f6465",
+      "error": "unsupported: DCTDecode stream filter"
+    },
+    {
+      "name": "filter_element_type",
+      "why": "a /Filter array element that is not a name is a structural error",
+      "api": "pith_pdf::decode_stream",
+      "input": "6e6f6e65",
+      "error": "bad value: /Filter element type"
+    },
+    {
+      "name": "filter_type",
+      "why": "a /Filter that is neither name nor array is a structural error",
+      "api": "pith_pdf::decode_stream",
+      "input": "6e6f6e65",
+      "error": "bad value: /Filter type"
+    },
+    {
+      "name": "decodeparms_type",
+      "why": "a /DecodeParms that is neither dict nor array is a structural error",
+      "api": "pith_pdf::decode_stream",
+      "input": "6e6f6e65",
+      "error": "bad value: /DecodeParms type"
+    },
+    {
+      "name": "asciihex_bad_char",
+      "why": "a non-hex character inside an ASCIIHexDecode stream",
+      "api": "pith_pdf::decode_stream",
+      "input": "41534349494865784465636f6465",
+      "error": "bad value: ASCIIHex character"
+    },
+    {
+      "name": "ascii85_bad_terminator",
+      "why": "an ASCII85Decode stream whose ~ is not followed by >",
+      "api": "pith_pdf::decode_stream",
+      "input": "415343494938354465636f6465",
+      "error": "bad value: ASCII85 terminator"
+    },
+    {
+      "name": "predictor_dimensions",
+      "why": "a TIFF predictor with a non-positive /Colors dimension",
+      "api": "pith_pdf::decode_stream",
+      "input": "466c6174654465636f6465",
+      "error": "bad value: DecodeParms dimensions"
+    },
+    {
+      "name": "tiff_predictor_bpc",
+      "why": "the TIFF predictor is only implemented for 8 bits per component",
+      "api": "pith_pdf::decode_stream",
+      "input": "466c6174654465636f6465",
+      "error": "unsupported: TIFF predictor bpc != 8"
+    },
+    {
+      "name": "predictor_value",
+      "why": "predictor 9 is neither TIFF (2) nor a PNG optimum (10-15)",
+      "api": "pith_pdf::decode_stream",
+      "input": "466c6174654465636f6465",
+      "error": "bad value: Predictor value"
+    }
+  ]
+}

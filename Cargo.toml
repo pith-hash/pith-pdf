@@ -1,0 +1,26 @@
+[package]
+name = "pith-pdf"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT"
+repository = "https://github.com/pith-hash/pith-pdf"
+homepage = "https://github.com/pith-hash/pith-pdf"
+description = "PDF text extraction across classic xref, xref streams, cmap and CID fonts"
+readme = "README.md"
+categories = ["algorithms", "cryptography"]
+keywords = ["pdf", "text-extraction", "cmap", "fonts", "hashing"]
+
+[dependencies]
+pith-digest = { git = "https://github.com/pith-hash/pith-digest.git", branch = "main" }
+pith-inflate = { git = "https://github.com/pith-hash/pith-inflate.git", branch = "main" }
+
+# Vector generator: regenerates reference.json (CI verifies it is current,
+# CD ships it with the SDK artifacts).
+[[bin]]
+name = "gen-reference"
+path = "tools/gen-reference/main.rs"
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "deny"

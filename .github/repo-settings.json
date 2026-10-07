@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "tier": 1,
+  "description": "PDF text extraction across classic xref, xref streams, cmap and CID fonts",
+  "homepage": "https://github.com/pith-hash/pith-pdf",
+  "topics": [
+    "rust",
+    "pdf",
+    "text-extraction"
+  ]
+}
