@@ -25,8 +25,8 @@ std = []
 [dependencies]
 # Error/Result of the whole suite come from pith-digest (fleet-wide single
 # error type), so it is a runtime dependency, not a dev-only one.
-pith-digest = { git = "https://github.com/pith-hash/pith-digest.git", branch = "main" }
-pith-inflate = { git = "https://github.com/pith-hash/pith-inflate.git", branch = "main" }
+pith-digest = { version = "0.1", git = "https://github.com/pith-hash/pith-digest.git", branch = "main" }
+pith-inflate = { version = "0.1", git = "https://github.com/pith-hash/pith-inflate.git", branch = "main" }
 
 # Vector generator: regenerates reference.json (CI verifies it is current,
 # CD ships it with the SDK artifacts).
