@@ -57,7 +57,11 @@ pub const PITH_E_UNSUPPORTED: i32 = -3;
 /// `data` must point to `len` readable bytes; `out` to one writable
 /// pointer; `out_len` to one writable `usize`. All must stay valid for
 /// the duration of the call; the function retains nothing.
-#[unsafe(no_mangle)]
+// Every export in this module is `no_mangle` outside `cfg(test)` only. Built twice
+// (unit-test binary and shipped library) one `no_mangle` symbol gets two coverage
+// hashes, and `llvm-cov` keeps whichever copy it reads first, so the coverage gate
+// would depend on object order. A unit-test build keeps the normal mangled names.
+#[cfg_attr(not(test), unsafe(no_mangle))]
 pub unsafe extern "C" fn pith_pdf_extract_canonical(
     data: *const u8,
     len: usize,
@@ -92,7 +96,7 @@ pub unsafe extern "C" fn pith_pdf_extract_canonical(
 /// with the `out_len` value that came back with it, and must not have
 /// been released (or otherwise freed) before. Null is accepted and
 /// ignored, so callers can free unconditionally on the error path.
-#[unsafe(no_mangle)]
+#[cfg_attr(not(test), unsafe(no_mangle))]
 pub unsafe extern "C" fn pith_pdf_free(ptr: *mut u8, len: usize) {
     if ptr.is_null() {
         return;
