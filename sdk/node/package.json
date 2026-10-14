@@ -1,6 +1,6 @@
 {
   "name": "@pith-hash/pith-pdf",
-  "version": "0.1.0",
+  "version": "0.1.1-beta.1",
   "description": "PDF text extraction SDK: classic xref, xref streams, cmap and CID fonts via the pith-pdf Rust cdylib (koffi, prebuilt)",
   "license": "MIT",
   "main": "index.js",
